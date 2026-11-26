@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101a2d">
+  <meta name="description" content="用简单直观的方式拆解《吾辈如神》：核心观点、全书结构、6D技术框架、富足悖论与延伸思考。">
+  <title>《吾辈如神》拆书｜技术如神，人要善任</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #172033;
+      --muted: #627087;
+      --paper: #f7f8fb;
+      --card: #ffffff;
+      --line: #e5e9f1;
+      --blue: #5b7cfa;
+      --cyan: #45c5d8;
+      --gold: #f0b84c;
+      --rose: #ee7e88;
+      --green: #54b990;
+      --shadow: 0 18px 48px rgba(27, 40, 67, .08);
+      --radius: 22px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.75;
+    }
+    a { color: inherit; }
+    button { font: inherit; }
+    .topbar {
+      position: sticky; top: 0; z-index: 20;
+      display: flex; align-items: center; justify-content: space-between; gap: 20px;
+      padding: 12px clamp(18px, 5vw, 72px);
+      background: rgba(16, 26, 45, .94); color: #fff; backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+    .brand { font-weight: 800; letter-spacing: .04em; white-space: nowrap; }
+    .nav { display: flex; gap: 18px; overflow-x: auto; scrollbar-width: none; }
+    .nav::-webkit-scrollbar { display: none; }
+    .nav a { color: #d6deed; text-decoration: none; font-size: .88rem; white-space: nowrap; }
+    .nav a:hover, .nav a:focus-visible { color: #fff; text-decoration: underline; text-underline-offset: 5px; }
+    .hero {
+      position: relative; overflow: hidden; color: white;
+      padding: clamp(72px, 12vw, 150px) clamp(22px, 8vw, 120px) 96px;
+      background: radial-gradient(circle at 82% 18%, rgba(69,197,216,.25), transparent 28%),
+                  radial-gradient(circle at 68% 80%, rgba(91,124,250,.34), transparent 32%),
+                  linear-gradient(135deg, #101a2d 0%, #172643 56%, #213b62 100%);
+    }
+    .hero:after {
+      content: ""; position: absolute; width: 430px; height: 430px; border: 1px solid rgba(255,255,255,.12);
+      border-radius: 50%; right: -120px; top: 80px; box-shadow: 0 0 0 44px rgba(255,255,255,.025), 0 0 0 90px rgba(255,255,255,.02);
+      pointer-events: none;
+    }
+    .hero-inner { position: relative; z-index: 1; max-width: 1080px; margin: auto; }
+    .eyebrow { color: #93dce8; font-size: .82rem; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; }
+    h1 { font-size: clamp(3rem, 8vw, 6.8rem); line-height: 1.05; letter-spacing: -.055em; margin: 18px 0 12px; }
+    .subtitle { font-size: clamp(1.05rem, 2.4vw, 1.6rem); color: #d4dfef; margin: 0; }
+    .hero-quote { max-width: 730px; margin: 38px 0 0; padding-left: 20px; border-left: 3px solid var(--cyan); color: #fff; font-size: clamp(1.1rem, 2.2vw, 1.5rem); }
+    .hero-quote strong { color: #96e5ec; }
+    .hero-meta { margin-top: 28px; color: #b7c5da; font-size: .9rem; }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
+    .button { display: inline-flex; align-items: center; gap: 8px; border-radius: 999px; padding: 11px 18px; text-decoration: none; font-weight: 750; border: 1px solid rgba(255,255,255,.28); color: white; }
+    .button.primary { background: white; color: #17233c; border-color: white; }
+    .button:hover { transform: translateY(-2px); }
+    main { width: min(1120px, calc(100% - 36px)); margin: -38px auto 80px; position: relative; z-index: 2; }
+    section { margin: 26px 0; scroll-margin-top: 88px; }
+    .panel { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: clamp(24px, 5vw, 48px); box-shadow: var(--shadow); }
+    .section-kicker { color: var(--blue); font-size: .78rem; font-weight: 850; letter-spacing: .13em; text-transform: uppercase; }
+    h2 { font-size: clamp(1.7rem, 4vw, 2.5rem); line-height: 1.2; margin: 8px 0 14px; letter-spacing: -.035em; }
+    h3 { margin: 0 0 8px; line-height: 1.35; }
+    p { margin: 8px 0 14px; }
+    .lead { font-size: 1.13rem; color: #3c4960; max-width: 850px; }
+    .one-line { margin-top: 22px; background: #eef4ff; border: 1px solid #dce7ff; padding: 20px 22px; border-radius: 16px; font-size: 1.16rem; }
+    .one-line strong { color: #3459ce; }
+    .grid { display: grid; gap: 16px; }
+    .three { grid-template-columns: repeat(3, 1fr); }
+    .two { grid-template-columns: repeat(2, 1fr); }
+    .card { border: 1px solid var(--line); background: #fff; padding: 21px; border-radius: 17px; }
+    .card p:last-child { margin-bottom: 0; }
+    .number { display: inline-grid; place-items: center; width: 36px; height: 36px; border-radius: 11px; background: #edf1ff; color: #4563df; font-weight: 850; margin-bottom: 12px; }
+    .tag { display: inline-block; font-size: .77rem; font-weight: 750; padding: 4px 9px; border-radius: 999px; color: #48556b; background: #f0f3f8; margin: 3px 4px 3px 0; }
+    .roadmap { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; }
+    .part { padding: 20px; border-radius: 16px; background: #f6f8fc; border-top: 4px solid var(--blue); }
+    .part:nth-child(2) { border-color: var(--rose); }
+    .part:nth-child(3) { border-color: var(--green); }
+    .part-label { font-size: .78rem; color: var(--muted); font-weight: 800; letter-spacing: .08em; }
+    .part h3 { margin: 7px 0 12px; }
+    .part ul { margin: 0; padding-left: 19px; color: #4e5a70; }
+    .part li { padding: 3px 0; }
+    .framework-intro { display: flex; align-items: end; justify-content: space-between; gap: 20px; }
+    .hint { color: var(--muted); font-size: .88rem; }
+    .steps { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; margin-top: 25px; }
+    .step {
+      text-align: left; min-height: 157px; border: 1px solid var(--line); border-radius: 15px; padding: 15px 13px;
+      background: #fff; cursor: pointer; transition: .2s ease; color: var(--ink);
+    }
+    .step:hover, .step.active { border-color: var(--blue); box-shadow: 0 8px 24px rgba(91,124,250,.15); transform: translateY(-3px); }
+    .step.active { background: #f2f5ff; }
+    .step-num { display: block; color: var(--blue); font-size: .72rem; font-weight: 900; letter-spacing: .08em; }
+    .step strong { display: block; margin: 8px 0 5px; font-size: 1rem; }
+    .step small { display: block; color: var(--muted); line-height: 1.45; }
+    .step-detail { min-height: 72px; background: #f5f7fb; border-radius: 14px; padding: 16px 18px; margin-top: 13px; color: #48556b; }
+    .paradox { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 16px; margin: 22px 0; }
+    .paradox-box { min-height: 135px; display: grid; align-content: center; text-align: center; padding: 20px; border-radius: 17px; }
+    .paradox-box.good { background: #edf9f5; color: #246a51; }
+    .paradox-box.risk { background: #fff2f1; color: #a14349; }
+    .paradox-arrow { color: #8994a8; font-size: 1.7rem; }
+    .risk-list { columns: 2; padding-left: 22px; color: #4e5a70; }
+    .risk-list li { padding: 5px 0; break-inside: avoid; }
+    .quote-box { background: #111d33; color: #fff; border-radius: 18px; padding: 26px; font-size: 1.2rem; }
+    .quote-box span { display: block; color: #aab9d1; font-size: .86rem; margin-top: 10px; }
+    .checklist { list-style: none; padding: 0; margin: 18px 0 0; }
+    .checklist li { position: relative; padding: 12px 12px 12px 40px; border-bottom: 1px solid var(--line); }
+    .checklist li:last-child { border-bottom: 0; }
+    .checklist li:before { content: "✓"; position: absolute; left: 7px; top: 13px; width: 23px; height: 23px; display: grid; place-items: center; border-radius: 50%; background: #e8f7f0; color: #248b61; font-weight: 900; }
+    details { border: 1px solid var(--line); border-radius: 14px; padding: 15px 18px; background: #fff; margin: 10px 0; }
+    summary { cursor: pointer; font-weight: 800; }
+    details p { color: #57647a; margin: 10px 0 0; }
+    .source-note { background: #fff9eb; border: 1px solid #f5e6bf; padding: 17px 19px; border-radius: 14px; color: #625338; font-size: .92rem; }
+    .source-note a { color: #745410; font-weight: 750; }
+    footer { padding: 34px 20px 54px; text-align: center; color: #748096; font-size: .88rem; }
+    .backtop { position: fixed; right: 20px; bottom: 20px; border: 0; border-radius: 50%; width: 46px; height: 46px; background: #17233c; color: #fff; box-shadow: var(--shadow); cursor: pointer; opacity: 0; pointer-events: none; transition: .2s; }
+    .backtop.show { opacity: 1; pointer-events: auto; }
+    :focus-visible { outline: 3px solid #86dfe7; outline-offset: 3px; }
+    @media (max-width: 800px) {
+      .nav { gap: 13px; }
+      .three { grid-template-columns: 1fr; }
+      .roadmap { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: repeat(3, 1fr); }
+      .step { min-height: 136px; }
+    }
+    @media (max-width: 560px) {
+      .topbar { align-items: flex-start; flex-direction: column; gap: 5px; padding: 10px 16px; }
+      .nav { width: 100%; }
+      .hero { padding: 66px 22px 78px; }
+      main { width: min(100% - 24px, 1120px); }
+      .panel { padding: 23px 19px; }
+      .two { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: repeat(2, 1fr); }
+      .paradox { grid-template-columns: 1fr; }
+      .paradox-arrow { transform: rotate(90deg); text-align: center; }
+      .risk-list { columns: 1; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">拆书小站 <span aria-hidden="true">·</span> WE ARE AS GODS</div>
+    <nav class="nav" aria-label="页面导航">
+      <a href="#core">核心</a><a href="#structure">结构</a><a href="#sixd">6D框架</a><a href="#paradox">富足悖论</a><a href="#read">为什么读</a><a href="#think">延伸</a>
+    </nav>
+  </header>
+
+  <section class="hero" id="top">
+    <div class="hero-inner">
+      <div class="eyebrow">A BOOK GUIDE · AI时代的生存力与胜任力</div>
+      <h1>吾辈如神</h1>
+      <p class="subtitle">重构 AI 时代的生存力与胜任力</p>
+      <blockquote class="hero-quote">“吾辈如神，<strong>理应胜任于此。</strong>”</blockquote>
+      <p class="hero-meta">彼得·戴曼迪斯（Peter H. Diamandis）与史蒂芬·科特勒（Steven Kotler）著</p>
+      <div class="hero-actions">
+        <a class="button primary" href="#core">开始拆解 <span aria-hidden="true">↓</span></a>
+        <a class="button" href="./MinerU_markdown_%E5%90%BE%E8%BE%88%E5%A6%82%E7%A5%9E_2125947466535772160.md">查看仓库原文 ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <section class="panel" id="core">
+      <div class="section-kicker">01 / THE BIG IDEA</div>
+      <h2>这本书在讲什么？</h2>
+      <p class="lead">AI、生物技术、机器人、能源和通信，正在把曾经属于神话的能力变成日常工具。但“能力变强”不代表“人自然变聪明”。这本书追问：当技术指数级增长，人类如何保住判断力、责任感与意义感？</p>
+      <div class="one-line"><strong>一句话：</strong>技术正把神话中的能力变成日常工具；人类要做的，是让智慧、伦理与行动力也同步升级。</div>
+      <div class="grid three" style="margin-top:20px">
+        <article class="card"><span class="number">1</span><h3>技术带来富足</h3><p>技术让许多资源与服务成本下降、覆盖更广，推动医疗、教育、能源和生产方式改变。</p></article>
+        <article class="card"><span class="number">2</span><h3>富足带来新问题</h3><p>解决旧问题的方案也可能带来成瘾、信息过载、污染、不平等与安全风险。</p></article>
+        <article class="card"><span class="number">3</span><h3>人需要升级心智</h3><p>未来的关键不只是会用工具，更是能判断、创造、协作并为结果负责。</p></article>
+      </div>
+    </section>
+
+    <section class="panel" id="structure">
+      <div class="section-kicker">02 / THE MAP</div>
+      <h2>全书结构：从“神力”到“善任”</h2>
+      <p class="lead">全书九章分为三部分，逻辑像一段旅程：先看见变化，再面对代价，最后重建人的能力。</p>
+      <div class="roadmap">
+        <article class="part"><div class="part-label">第一部分 · 看见变化</div><h3>吾辈如神</h3><ul><li>旧石器大脑与神级技术</li><li>富足从何而来</li><li>医疗、食品、教育等现实案例</li></ul></article>
+        <article class="part"><div class="part-label">第二部分 · 直面代价</div><h3>机遇与危机同在</h3><ul><li>AI 革命如何发展</li><li>AI 与其他指数型技术融合</li><li>技术反噬与富足的阴暗面</li></ul></article>
+        <article class="part"><div class="part-label">第三部分 · 重建能力</div><h3>从线性到指数型思维</h3><ul><li>重塑认知、目标与创造力</li><li>探索人机协同与大脑增强</li><li>在富足中重新寻找意义</li></ul></article>
+      </div>
+    </section>
+
+    <section class="panel" id="sixd">
+      <div class="framework-intro">
+        <div><div class="section-kicker">03 / THE 6D FRAMEWORK</div><h2>技术如何从新奇变成日常？</h2></div>
+        <div class="hint">点选任意阶段查看解释</div>
+      </div>
+      <p class="lead">6D 是观察技术扩散的一张路线图：早期增长常不显眼，之后可能降低成本、重塑行业，最终走向普及。</p>
+      <div class="steps" role="group" aria-label="6D技术发展阶段">
+        <button class="step active" type="button" data-title="数字化 Digitization" data-text="把信息或流程转化为数字数据。数字化让内容更容易复制、传输、分析和改进。"><span class="step-num">D1</span><strong>数字化</strong><small>变成数据与代码</small></button>
+        <button class="step" type="button" data-title="欺骗性 Deception" data-text="技术早期的增长看起来很慢，容易被低估。指数增长的前段不够显眼，但并不意味着它没有积累。"><span class="step-num">D2</span><strong>欺骗性</strong><small>初期不易察觉</small></button>
+        <button class="step" type="button" data-title="颠覆性 Disruption" data-text="当性能、成本或体验达到关键点，新技术开始改变旧行业，替代部分旧产品和旧流程。"><span class="step-num">D3</span><strong>颠覆性</strong><small>改变行业规则</small></button>
+        <button class="step" type="button" data-title="去货币化 Demonetization" data-text="原本需要付费购买的能力，价格显著下降，甚至被整合进免费或低价服务中。"><span class="step-num">D4</span><strong>去货币化</strong><small>成本大幅下降</small></button>
+        <button class="step" type="button" data-title="去物质化 Dematerialization" data-text="原本需要多个实体设备提供的功能，逐渐转为软件、网络服务或一台设备中的功能。"><span class="step-num">D5</span><strong>去物质化</strong><small>实体形态消失</small></button>
+        <button class="step" type="button" data-title="大众化 Democratization" data-text="技术变得更便宜、更容易取得，过去只有少数人能使用的能力开始被更多人拥有。"><span class="step-num">D6</span><strong>大众化</strong><small>人人都能使用</small></button>
+      </div>
+      <div class="step-detail" id="stepDetail" aria-live="polite"><strong>数字化 Digitization：</strong>把信息或流程转化为数字数据。数字化让内容更容易复制、传输、分析和改进。</div>
+    </section>
+
+    <section class="panel" id="paradox">
+      <div class="section-kicker">04 / THE PARADOX</div>
+      <h2>富足悖论：解决方案，也会制造新挑战</h2>
+      <p class="lead">技术解决稀缺问题，但解决问题的方式可能改变环境、行为和社会结构，进而带来下一轮问题。</p>
+      <div class="paradox" aria-label="富足既带来收益也带来风险">
+        <div class="paradox-box good"><strong>技术进���</strong><span>更便宜、更快、更广泛</span></div>
+        <div class="paradox-arrow" aria-hidden="true">→</div>
+        <div class="paradox-box risk"><strong>意外后果</strong><span>新风险、新依赖、新不平等</span></div>
+      </div>
+      <div class="grid two">
+        <article class="card"><h3>富足带来的机会</h3><p><span class="tag">医疗</span><span class="tag">教育</span><span class="tag">能源</span><span class="tag">通信</span><span class="tag">生产力</span></p><p>更多人获得工具、信息与服务，过去昂贵或难以实现的事情变得可及。</p></article>
+        <article class="card"><h3>富足带来的挑战</h3><p><span class="tag">信息过载</span><span class="tag">成瘾</span><span class="tag">污染</span><span class="tag">不平等</span><span class="tag">AI风险</span></p><p>规模越大，影响可能越广；技术发展需要伦理、制度和协作一起跟上。</p></article>
+      </div>
+      <ol class="risk-list">
+        <li>气候危机与生态风险</li><li>微塑料与永久性化学污染</li><li>肥胖、成瘾与心理健康问题</li><li>生物安全与未来大流行风险</li><li>AI风险、隐私与权力集中</li><li>贫富差距与政治极化</li>
+      </ol>
+    </section>
+
+    <section class="panel" id="read">
+      <div class="section-kicker">05 / WHY READ</div>
+      <h2>为什么值得读？</h2>
+      <div class="grid two">
+        <article class="card"><h3>它不只谈工具，也谈人</h3><p>把“AI会做什么”延伸到“人在AI时代应该保留什么”。</p></article>
+        <article class="card"><h3>它提供观察变化的框架</h3><p>6D 框架帮助读者思考技术如何从早期尝��走向普及，但它是思考工具，不是万能预测器。</p></article>
+        <article class="card"><h3>它同时讨论机会与代价</h3><p>提醒我们不要把技术进步直接等同于社会进步，必须追问收益和风险由谁承担。</p></article>
+        <article class="card"><h3>它适合跨领域阅读</h3><p>创业、教育、制造、投资、科技伦理和公共政策的读者，都可以借它打开讨论。</p></article>
+      </div>
+      <div class="source-note" style="margin-top:18px"><strong>阅读提示：</strong>书中部分技术时间表、规模判断和案例带有作者的乐观推演，应区分已发生的事实、作者的解释与未来预测。仓库原文是 OCR 文档，存在错字、截断和杂入内容；引用具体数据前建议核对正式出版物及其注释。<br><a href="./MinerU_markdown_%E5%90%BE%E8%BE%88%E5%A6%82%E7%A5%9E_2125947466535772160.md">打开仓库中的书籍文本 ↗</a></div>
+    </section>
+
+    <section class="panel" id="takeaway">
+      <div class="section-kicker">06 / THE HUMAN PART</div>
+      <h2>AI 可以帮忙，但哪些事不能外包？</h2>
+      <div class="quote-box">“不可外包你的灵魂。”<span>把它理解为：工具可以放大你的能力，但价值判断、选择与责任仍要由你承担。</span></div>
+      <ul class="checklist">
+        <li><strong>先想，再问：</strong>先写下自己的问题或初步判断，再让 AI 扩展思路。</li>
+        <li><strong>核查结果：</strong>检查证据、来源、遗漏和可能的偏见。</li>
+        <li><strong>保留创造：</strong>把 AI 当作反馈与放大器，不把创意和思考过程完全交出去。</li>
+        <li><strong>承担决定：</strong>重要决策要由人判断并承担后果，不能把责任推给模型。</li>
+      </ul>
+    </section>
+
+    <section class="panel" id="think">
+      <div class="section-kicker">07 / THINK FURTHER</div>
+      <h2>延伸思考</h2>
+      <details><summary>怎样判断 AI 是在增强我，还是替代我？</summary><p>问自己：我能否解释结果？能否发现错误？没有 AI 时，我是否仍能独立完成关键思考？最后的判断和责任由谁承担？</p></details>
+      <details><summary>为什么富足了，人仍可能不幸福？</summary><p>物质改善不自动生成目标、归属、关系和意义。富足之后，人需要主动选择挑战、创造和贡献，而不只是继续消费更多。</p></details>
+      <details><summary>讨论新技术时，应该追问什么？</summary><p>谁获得收益？谁承担风险？谁拥有控制权？受影响的人有没有发言权？技术是否增强人的尊严与自主性？</p></details>
+      <details><summary>怎样读技术乐观主义作品更清醒？</summary><p>把内容分成“事实、解释、预测”三类。事实查来源，解释看论证，预测则保留不确定性，并与不同立场的资料对照。</p></details>
+      <div class="one-line"><strong>读完带走：</strong>不要只问“AI 能做什么”，也要问“我希望它帮我成为什么样的人”��</div>
+    </section>
+
+    <section class="source-note">
+      <strong>关于本仓库：</strong>本页根据仓库中的《吾辈如神》Markdown 文档整理，旨在做易读的导览与拆解，不替代正式出版物。<a href="https://github.com/Jessic1989/-11">返回 GitHub 仓库 ↗</a>
+    </section>
+  </main>
+  <footer>《吾辈如神》拆书网页 · 单文件 HTML 展示 · 适配手机与桌面阅读</footer>
+  <button class="backtop" id="backtop" type="button" aria-label="返回页面顶部">↑</button>
+  <script>
+    const stepButtons = document.querySelectorAll('.step');
+    const stepDetail = document.getElementById('stepDetail');
+    stepButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        stepButtons.forEach((item) => item.classList.remove('active'));
+        button.classList.add('active');
+        stepDetail.innerHTML = `<strong>${button.dataset.title}：</strong>${button.dataset.text}`;
+      });
+    });
+    const backtop = document.getElementById('backtop');
+    window.addEventListener('scroll', () => {
+      backtop.classList.toggle('show', window.scrollY > 500);
+    }, { passive: true });
+    backtop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  </script>
+</body>
+</html>
